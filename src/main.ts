@@ -7,6 +7,7 @@ const logger = new Logger('Main');
 const bootstrap = async (): Promise<void> => {
   const PORT = process.env.API_PORT || 4001;
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   await app.listen(PORT);
   logger.log(`The app started on the port ${PORT}`);
 };
