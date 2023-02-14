@@ -9,6 +9,7 @@ import { StatusService } from './status.service';
 import { Status } from './status.entity';
 import { LoginDto } from './dto/login.dto';
 import { ReportDto } from './dto/report.dto';
+import { LogoutDto } from './dto/logout.dto';
 
 @Controller('statuses')
 export class StatusController {
@@ -29,6 +30,16 @@ export class StatusController {
   async report(@Body() reportDto: ReportDto): Promise<Partial<Status>> {
     try {
       return await this.statusService.report(reportDto);
+    } catch (error) {
+      this.logger.error(error.message, error.stack, error.context);
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  @Put('logout')
+  async logout(@Body() logOut: LogoutDto): Promise<Partial<Status>> {
+    try {
+      return await this.statusService.logout(logOut);
     } catch (error) {
       this.logger.error(error.message, error.stack, error.context);
       throw new BadRequestException(error.message);

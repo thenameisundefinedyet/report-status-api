@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      `mongodb+srv://Petro:Dbadminpass1@cluster1.saev67v.mongodb.net/Database1?retryWrites=true&w=majority`,
+      `mongodb+srv://Petro:${process.env.DB_PASSWORD}@cluster1.saev67v.mongodb.net/Database1?retryWrites=true&w=majority`,
     ),
     StatusModule,
   ],
