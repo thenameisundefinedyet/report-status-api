@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   Logger,
   Put,
 } from '@nestjs/common';
@@ -10,6 +11,7 @@ import { Status } from './status.entity';
 import { LoginDto } from './dto/login.dto';
 import { ReportDto } from './dto/report.dto';
 import { LogoutDto } from './dto/logout.dto';
+import { GetUsersDto } from './dto/get-users.dto';
 
 @Controller('statuses')
 export class StatusController {
@@ -46,37 +48,15 @@ export class StatusController {
     }
   }
 
-  //
-  // @Get()
-  // async getAll(): Promise<Array<Counter>> {
-  //   try {
-  //     return await this.counterService.getAll();
-  //   } catch (error) {
-  //     this.logger.error(error.message, error.stack, error.context);
-  //     throw new BadRequestException(error.message);
-  //   }
-  // }
-  //
-  // @Put(':id')
-  // async update(
-  //   @Param() { id }: { id: number },
-  //   @Body() updateCounterDto: CreateUpdateStatusDto,
-  // ): Promise<Counter> {
-  //   try {
-  //     return await this.counterService.update(id, updateCounterDto);
-  //   } catch (error) {
-  //     this.logger.error(error.message, error.stack, error.context);
-  //     throw new BadRequestException(error.message);
-  //   }
-  // }
-  //
-  // @Delete(':id')
-  // async delete(@Param() { id }: { id: number }): Promise<DeleteResult> {
-  //   try {
-  //     return await this.counterService.delete(id);
-  //   } catch (error) {
-  //     this.logger.error(error.message, error.stack, error.context);
-  //     throw new BadRequestException(error.message);
-  //   }
-  // }
+  @Get('users')
+  async getUsers(
+    @Body() getUsersDto: GetUsersDto,
+  ): Promise<Array<Partial<Status>>> {
+    try {
+      return await this.statusService.getUsers(getUsersDto);
+    } catch (error) {
+      this.logger.error(error.message, error.stack, error.context);
+      throw new BadRequestException(error.message);
+    }
+  }
 }
