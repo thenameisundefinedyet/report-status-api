@@ -26,6 +26,7 @@
     "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
+
     "@nestjs/cli": "^9.2.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
