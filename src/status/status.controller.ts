@@ -2,8 +2,8 @@ import {
   BadRequestException,
   Body,
   Controller,
-  Get,
   Logger,
+  Post,
   Put,
 } from '@nestjs/common';
 import { StatusService } from './status.service';
@@ -48,7 +48,7 @@ export class StatusController {
     }
   }
 
-  @Get('users')
+  @Post('users')
   async getUsers(
     @Body() getUsersDto: GetUsersDto,
   ): Promise<Array<Partial<Status>>> {
